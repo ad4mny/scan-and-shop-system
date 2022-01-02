@@ -78,7 +78,7 @@
                 <?php if (isset($items) && is_array($items) && !empty($items) && $items != false) {
                     foreach ($items as $row) { ?>
                         <div class="row bg-white rounded-3 shadow mb-2 py-2 d-flex align-items-center justify-content-center text-center">
-                            <div class="col-2">
+                            <div class="col-1">
                                 <p class="mb-0 text-capitalize"><?php echo $row['itemID']; ?></p>
                             </div>
                             <div class="col-2">
@@ -94,11 +94,15 @@
                                 <p class="mb-0"><?php echo $row['itemName']; ?></p>
                                 <p class="mb-0"><?php echo $row['itemDesc']; ?></p>
                             </div>
-                            <div class="col-2">
-                                RM <?php echo number_format((float)$row['itemPrice'], 2, '.', ''); ?>
+                            <div class="col-2 text-start">
+                                <p class="mb-0">RM <?php echo number_format((float)$row['itemPrice'], 2, '.', ''); ?></p>
+                                <p class="mb-0"><?php echo $row['itemStatus']; ?></p>
                             </div>
                             <div class="col-2">
-                                <?php echo $row['itemStatus']; ?>
+                                <a href="<?php echo base_url() . 'delete/' . $row['itemID']; ?>" class="btn btn-outline-danger">
+                                    <i class="fas fa-trash fa-fw me-1"></i>
+                                    Delete
+                                </a>
                             </div>
                         </div>
                     <?php }

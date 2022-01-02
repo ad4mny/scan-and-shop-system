@@ -22,4 +22,20 @@ class IndexModel extends CI_Model
 
         return $this->db->insert('itemData', $data);
     }
+
+    public function deleteItemModel($itemID)
+    {
+        $this->db->select('*');
+        $this->db->from('itemData');
+        $this->db->where('itemID', $itemID);
+
+        $data = $this->db->get()->row_array();
+
+        if ($data['itemImg'] !== NULL) {
+            unlink(base_url() . 'assets/items/' . $data['itemImg']);
+        }
+
+        $this->db->where('itemID', $itemID);
+        return $this->db->delete('itemData');
+    }
 }

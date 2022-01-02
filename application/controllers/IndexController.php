@@ -37,9 +37,9 @@ class IndexController extends CI_Controller
                 redirect(base_url());
             } else {
                 if ($this->IndexModel->addItemModel($itemName, $itemPrice, NULL, $itemStatus, $itemDesc) !== false) {
-                    $this->session->set_tempdata('notice', 'Your item has been added succesfully.', 1);
+                    $this->session->set_tempdata('notice', 'Item has been added succesfully.', 1);
                 } else {
-                    $this->session->set_tempdata('error', 'Failed to add your new item.', 1);
+                    $this->session->set_tempdata('error', 'Failed to add the new item.', 1);
                 }
                 redirect(base_url());
             }
@@ -48,11 +48,21 @@ class IndexController extends CI_Controller
             $itemImg = $this->upload->data('file_name');
 
             if ($this->IndexModel->addItemModel($itemName, $itemPrice, $itemImg, $itemStatus, $itemDesc) !== false) {
-                $this->session->set_tempdata('notice', 'Your item has been added succesfully.', 1);
+                $this->session->set_tempdata('notice', 'Item has been added succesfully.', 1);
             } else {
-                $this->session->set_tempdata('error', 'Failed to add your new item.', 1);
+                $this->session->set_tempdata('error', 'Failed to add the new item.', 1);
             }
             redirect(base_url());
         }
+    }
+
+    public function deleteItem($itemID)
+    {
+        if ($this->IndexModel->deleteItemModel($itemID) !== false) {
+            $this->session->set_tempdata('notice', 'The item has been delete succesfully.', 1);
+        } else {
+            $this->session->set_tempdata('error', 'Failed to delete the item.', 1);
+        }
+        redirect(base_url());
     }
 }
